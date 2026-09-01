@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Receipt | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="receipt-page">
+<div class="receipt">
+    <div class="receipt-header">
+        <div class="brand-mark small">SD</div>
+        <div>
+            <h1>Sunrise Dental Clinic</h1>
+            <p>Colombo, Sri Lanka</p>
+        </div>
+    </div>
+
+    <div class="receipt-meta">
+        <div><span>Bill No.</span><strong th:text="${bill.billNumber}"></strong></div>
+        <div><span>Appointment No.</span><strong th:text="${bill.appointment.appointmentNumber}"></strong></div>
+        <div><span>Patient</span><strong th:text="${bill.appointment.patient.name}"></strong></div>
+        <div><span>Generated</span><strong th:text="${bill.generatedAt}"></strong></div>
+    </div>
+
+    <table class="bill-table">
+        <thead>
+        <tr><th>Description</th><th>Amount (LKR)</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${bill.appointment.treatment.name}"></td>
+            <td th:text="${#numbers.formatDecimal(bill.treatmentFee, 1, 'COMMA', 2, 'POINT')}"></td>
+        </tr>
+        <tr>
+            <td>Consultation Fee</td>
+            <td th:text="${#numbers.formatDecimal(bill.consultationFee, 1, 'COMMA', 2, 'POINT')}"></td>
+        </tr>
+        <tr class="total-row">
+            <td>Total</td>
+            <td th:text="${#numbers.formatDecimal(bill.totalAmount, 1, 'COMMA', 2, 'POINT')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="receipt-thanks">Thank you for choosing Sunrise Dental Clinic.</p>
+
+    <div class="no-print receipt-actions">
+        <a class="btn ghost" th:href="@{/appointments/{n}(n=${bill.appointment.appointmentNumber})}">Back</a>
+        <button class="btn primary" onclick="window.print()">Print Receipt</button>
+    </div>
+</div>
+</body>
+</html>

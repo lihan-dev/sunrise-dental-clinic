@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register Appointment | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<main class="container narrow">
+    <div class="page-heading">
+        <div>
+            <h1>Register New Appointment</h1>
+            <p class="muted">The appointment number is generated automatically and stored in MySQL.</p>
+        </div>
+    </div>
+
+    <div th:if="${businessError}" class="alert error" th:text="${businessError}"></div>
+
+    <form th:action="@{/appointments}" th:object="${appointmentForm}" method="post" class="panel form-grid">
+        <div class="field full-span">
+            <label>Patient Name *</label>
+            <input th:field="*{patientName}" type="text" placeholder="Full name">
+            <small class="field-error" th:errors="*{patientName}"></small>
+        </div>
+
+        <div class="field full-span">
+            <label>Address *</label>
+            <textarea th:field="*{address}" rows="3" placeholder="Patient address"></textarea>
+            <small class="field-error" th:errors="*{address}"></small>
+        </div>
+
+        <div class="field">
+            <label>Contact Number *</label>
+            <input th:field="*{contactNumber}" type="text" placeholder="+94 77 123 4567">
+            <small class="field-error" th:errors="*{contactNumber}"></small>
+        </div>
+
+        <div class="field">
+            <label>Dentist *</label>
+            <select th:field="*{dentistId}">
+                <option value="">Select dentist</option>
+                <option th:each="d : ${dentists}" th:value="${d.id}"
+                        th:text="${d.name + ' — ' + d.specialization}"></option>
+            </select>
+            <small class="field-error" th:errors="*{dentistId}"></small>
+        </div>
+
+        <div class="field">
+            <label>Treatment Type *</label>
+            <select th:field="*{treatmentId}">
+                <option value="">Select treatment</option>
+                <option th:each="t : ${treatments}" th:value="${t.id}"
+                        th:text="${t.name + ' — LKR ' + #numbers.formatDecimal(t.treatmentFee, 1, 'COMMA', 2, 'POINT')}"></option>
+            </select>
+            <small class="field-error" th:errors="*{treatmentId}"></small>
+        </div>
+
+        <div class="field">
+            <label>Appointment Date *</label>
+            <input th:field="*{appointmentDate}" type="date">
+            <small class="field-error" th:errors="*{appointmentDate}"></small>
+        </div>
+
+        <div class="field">
+            <label>Appointment Time *</label>
+            <input th:field="*{appointmentTime}" type="time" step="900">
+            <small class="field-error" th:errors="*{appointmentTime}"></small>
+        </div>
+
+        <div class="full-span form-actions">
+            <a th:href="@{/dashboard}" class="btn ghost">Cancel</a>
+            <button type="submit" class="btn primary">Save Appointment</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

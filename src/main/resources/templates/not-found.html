@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Found | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container narrow">
+    <section class="panel center">
+        <h1>Record Not Found</h1>
+        <p th:text="${message}">The requested record could not be found.</p>
+        <a class="btn primary" th:href="@{/dashboard}">Return to Dashboard</a>
+    </section>
+</main>
+</body>
+</html>

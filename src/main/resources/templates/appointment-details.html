@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Appointment Details | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<main class="container narrow">
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+
+    <section class="panel">
+        <div class="page-heading compact">
+            <div>
+                <p class="eyebrow">APPOINTMENT</p>
+                <h1 th:text="${appointment.appointmentNumber}"></h1>
+            </div>
+            <span class="status large" th:text="${appointment.status}"></span>
+        </div>
+
+        <div class="details-grid">
+            <div><span>Patient Name</span><strong th:text="${appointment.patient.name}"></strong></div>
+            <div><span>Contact Number</span><strong th:text="${appointment.patient.contactNumber}"></strong></div>
+            <div class="full-span"><span>Address</span><strong th:text="${appointment.patient.address}"></strong></div>
+            <div><span>Dentist</span><strong th:text="${appointment.dentist.name}"></strong></div>
+            <div><span>Treatment</span><strong th:text="${appointment.treatment.name}"></strong></div>
+            <div><span>Date</span><strong th:text="${appointment.appointmentDate}"></strong></div>
+            <div><span>Time</span><strong th:text="${appointment.appointmentTime}"></strong></div>
+            <div><span>Treatment Fee</span><strong>LKR <span th:text="${#numbers.formatDecimal(appointment.treatment.treatmentFee, 1, 'COMMA', 2, 'POINT')}"></span></strong></div>
+            <div><span>Consultation Fee</span><strong>LKR 1,500.00</strong></div>
+        </div>
+
+        <div class="split-actions">
+            <form th:action="@{/appointments/{n}/status(n=${appointment.appointmentNumber})}" method="post" class="inline-fields">
+                <select name="status">
+                    <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}" th:selected="${s == appointment.status}"></option>
+                </select>
+                <button class="btn secondary" type="submit">Update Status</button>
+            </form>
+
+            <form th:action="@{/billing/{n}(n=${appointment.appointmentNumber})}" method="post">
+                <button class="btn primary" type="submit">Calculate & Print Bill</button>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

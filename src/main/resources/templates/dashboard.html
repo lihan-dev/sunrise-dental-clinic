@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<main class="container">
+    <div class="page-heading">
+        <div>
+            <h1>Clinic Dashboard</h1>
+            <p class="muted">Appointment, patient and billing management</p>
+        </div>
+        <a class="btn primary" th:href="@{/appointments/new}">+ Register Appointment</a>
+    </div>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+
+    <section class="stats-grid">
+        <article class="stat-card">
+            <span>Today's appointments</span>
+            <strong th:text="${todayCount}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>Total billed revenue</span>
+            <strong>LKR <span th:text="${#numbers.formatDecimal(totalRevenue, 1, 'COMMA', 2, 'POINT')}">0.00</span></strong>
+        </article>
+        <article class="stat-card">
+            <span>System status</span>
+            <strong>Online</strong>
+        </article>
+    </section>
+
+    <section class="panel">
+        <h2>Find Appointment</h2>
+        <form th:action="@{/appointments/search}" method="get" class="search-row">
+            <input type="text" name="appointmentNumber" placeholder="e.g. APT-20260901-ABC123" required>
+            <button class="btn secondary" type="submit">Search</button>
+        </form>
+    </section>
+
+    <section class="panel">
+        <div class="section-title">
+            <h2>Recently Registered</h2>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Appointment No.</th>
+                    <th>Patient</th>
+                    <th>Dentist</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${recentAppointments}">
+                    <td th:text="${a.appointmentNumber}"></td>
+                    <td th:text="${a.patient.name}"></td>
+                    <td th:text="${a.dentist.name}"></td>
+                    <td th:text="${a.appointmentDate}"></td>
+                    <td th:text="${a.appointmentTime}"></td>
+                    <td><span class="status" th:text="${a.status}"></span></td>
+                    <td><a th:href="@{/appointments/{n}(n=${a.appointmentNumber})}">Open</a></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(recentAppointments)}">
+                    <td colspan="7" class="empty">No appointments registered yet.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

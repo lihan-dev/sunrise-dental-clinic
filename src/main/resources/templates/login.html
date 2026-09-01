@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body class="login-body">
+    <div class="login-card">
+      <div class="brand-mark">SD</div>
+      <h1>Sunrise Dental Clinic</h1>
+      <p class="muted">Authorized staff access</p>
+
+      <div th:if="${param.error}" class="alert error">
+        Invalid username or password.
+      </div>
+      <div th:if="${param.logout}" class="alert success">
+        You have logged out safely.
+      </div>
+
+      <form th:action="@{/login}" method="post">
+        <label>Username</label>
+        <input type="text" name="username" autocomplete="username" required />
+
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        />
+
+        <button type="submit" class="btn primary full">Login</button>
+      </form>
+    </div>
+  </body>
+</html>

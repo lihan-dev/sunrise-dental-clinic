@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reports | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<main class="container">
+    <div class="page-heading">
+        <div>
+            <h1>Management Reports</h1>
+            <p class="muted">Daily appointment schedule and revenue summary</p>
+        </div>
+    </div>
+
+    <section class="stats-grid">
+        <article class="stat-card">
+            <span>Total billed revenue</span>
+            <strong>LKR <span th:text="${#numbers.formatDecimal(totalRevenue, 1, 'COMMA', 2, 'POINT')}"></span></strong>
+        </article>
+    </section>
+
+    <section class="panel">
+        <form method="get" th:action="@{/reports}" class="search-row">
+            <input type="date" name="date" th:value="${selectedDate}">
+            <button class="btn secondary" type="submit">Load Daily Report</button>
+            <button class="btn ghost no-print" type="button" onclick="window.print()">Print Report</button>
+        </form>
+
+        <h2>Appointments for <span th:text="${selectedDate}"></span></h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Patient</th>
+                    <th>Dentist</th>
+                    <th>Treatment</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${appointments}">
+                    <td th:text="${a.appointmentNumber}"></td>
+                    <td th:text="${a.patient.name}"></td>
+                    <td th:text="${a.dentist.name}"></td>
+                    <td th:text="${a.treatment.name}"></td>
+                    <td th:text="${a.appointmentTime}"></td>
+                    <td th:text="${a.status}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(appointments)}">
+                    <td colspan="6" class="empty">No appointments found for this date.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Help | Sunrise Dental Clinic</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<main class="container narrow">
+    <div class="page-heading">
+        <div>
+            <h1>Help & Staff Guide</h1>
+            <p class="muted">Step-by-step instructions for new staff.</p>
+        </div>
+    </div>
+
+    <section class="panel help-list">
+        <div>
+            <span class="step">1</span>
+            <h2>Login</h2>
+            <p>Enter the username and password assigned to authorized clinic staff. Do not share credentials.</p>
+        </div>
+        <div>
+            <span class="step">2</span>
+            <h2>Register an Appointment</h2>
+            <p>Choose <strong>New Appointment</strong>, enter patient name, address, contact number, dentist, treatment, date and time, then click <strong>Save Appointment</strong>. The system creates a unique appointment number automatically.</p>
+        </div>
+        <div>
+            <span class="step">3</span>
+            <h2>Find Appointment Details</h2>
+            <p>On the dashboard, type the appointment number into <strong>Find Appointment</strong>. The complete patient and appointment record is shown.</p>
+        </div>
+        <div>
+            <span class="step">4</span>
+            <h2>Calculate and Print a Bill</h2>
+            <p>Open the appointment and choose <strong>Calculate & Print Bill</strong>. The total is calculated from the treatment fee plus the consultation fee. Use <strong>Print Receipt</strong> to print or save it as PDF.</p>
+        </div>
+        <div>
+            <span class="step">5</span>
+            <h2>Reports</h2>
+            <p>Open <strong>Reports</strong>, select a date and view/print the daily appointment schedule. The dashboard and report page also show billed revenue.</p>
+        </div>
+        <div>
+            <span class="step">6</span>
+            <h2>Exit Safely</h2>
+            <p>Use <strong>Exit / Logout</strong>. This invalidates the login session and returns to the secure login page.</p>
+        </div>
+    </section>
+</main>
+</body>
+</html>

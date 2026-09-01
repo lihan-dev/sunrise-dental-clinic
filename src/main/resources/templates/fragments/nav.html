@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="nav" class="topnav">
+    <div class="nav-brand">
+        <span class="brand-badge">SD</span>
+        <span>Sunrise Dental Clinic</span>
+    </div>
+    <div class="nav-links">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/appointments/new}">New Appointment</a>
+        <a th:href="@{/reports}">Reports</a>
+        <a th:href="@{/help}">Help</a>
+        <form th:action="@{/logout}" method="post" class="inline-form">
+            <button class="link-button" type="submit">Exit / Logout</button>
+        </form>
+    </div>
+</nav>
+</body>
+</html>
