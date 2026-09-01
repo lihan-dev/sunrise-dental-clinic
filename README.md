@@ -86,33 +86,14 @@ POST   /api/v1/appointments
 POST   /api/v1/bills/{appointmentNumber}
 GET    /api/v1/bills/{billNumber}
 ```
+## Localhost
+Application URL: http://localhost:8080
 
-## UML
-
-PlantUML source files are under:
-
-```text
-docs/uml/
-```
-
-They cover:
-- use case;
-- class diagram;
-- sequence: register appointment;
-- sequence: search appointment;
-- sequence: generate bill.
-
-## Testing
-
-```bash
-mvn clean test
-```
-
-See:
-
-```text
-docs/TEST_PLAN.md
-```
+## Technology
+Java 17
+Spring Boot
+MySQL
+Maven
 
 ## Important academic note
 
