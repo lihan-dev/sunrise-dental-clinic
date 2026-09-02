@@ -47,12 +47,6 @@ Login:
 admin / Admin@123
 ```
 
-More detailed instructions:
-
-```text
-docs/LOCALHOST_GUIDE.md
-```
-
 ## Database tables
 
 The application stores all required appointment information in MySQL:
@@ -94,9 +88,3 @@ Java 17
 Spring Boot
 MySQL
 Maven
-
-## Important academic note
-
-You should understand and be able to explain the code and design choices during any viva/interview.
-Capture your own screenshots, Git history, test results and deployment evidence. Do not claim
-development activity that you did not actually perform.
